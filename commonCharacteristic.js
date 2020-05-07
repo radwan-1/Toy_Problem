@@ -28,3 +28,38 @@ var commonCharacters = function () {
    * with the characters so far. If an empty object is passed, then of course there
    * are no other characters that will match against the empty object.
   */
+ var result = args.reduce(function (acc, cur) {
+  return createUniqueSet(acc, cur);
+}, createHash(first));
+
+for (var i = 0; i < first.length; i += 1) {
+  if (result[first[i]]) {
+    str += first[i];
+    result[first[i]] = false;
+  }
+}
+
+return str;
+};
+
+var createHash = function (string) {
+var result = {};
+for (var i = 0; i < string.length; i += 1) {
+  result[ string[i] ] = true;
+}
+return result;
+};
+
+var createUniqueSet = function (obj, string) {
+var result = {};
+var len    = string.length;
+var i;
+
+for (i = 0; i < len; i += 1) {
+  if (obj[ string[i] ]) {
+    result[ string[i] ] = true;
+  }
+}
+
+return result;
+};
